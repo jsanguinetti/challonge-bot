@@ -19,6 +19,15 @@
     },
     "clientSecret": {
       "description": "Client Secret provided by Slack"
+    },
+    "clientSigningSecret": {
+      "description": "clientSigningSecret"
+    },
+    "botToken": {
+      "description": "botToken"
+    },
+    "verificationToken": {
+      "description": "verificationToken"
     }
   },
   "formation": {

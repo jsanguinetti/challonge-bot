@@ -12,7 +12,7 @@ const { BotkitCMSHelper } = require('botkit-plugin-cms');
 
 const { SlackAdapter, SlackMessageTypeMiddleware, SlackEventMiddleware } = require('botbuilder-adapter-slack');
 
-const { MongoDbStorage } = require('botbuilder-storage-mongodb');
+// const { MongoDbStorage } = require('botbuilder-storage-mongodb');
 
 // Load process.env values from .env file
 require('dotenv').config();
@@ -20,7 +20,7 @@ require('dotenv').config();
 let storage = null;
 if (process.env.MONGO_URI) {
     storage = mongoStorage = new MongoDbStorage({
-        url : process.env.MONGO_URI,
+        url: process.env.MONGO_URI,
     });
 }
 
@@ -29,7 +29,7 @@ if (process.env.MONGO_URI) {
 const adapter = new SlackAdapter({
     // parameters used to secure webhook endpoint
     verificationToken: process.env.verificationToken,
-    clientSigningSecret: process.env.clientSigningSecret,  
+    clientSigningSecret: process.env.clientSigningSecret,
 
     // auth token for a single-team app
     botToken: process.env.botToken,
@@ -37,9 +37,9 @@ const adapter = new SlackAdapter({
     // credentials used to set up oauth for multi-team apps
     clientId: process.env.clientId,
     clientSecret: process.env.clientSecret,
-    scopes: ['bot'], 
+    scopes: ['bot'],
     redirectUri: process.env.redirectUri,
- 
+
     // functions required for retrieving team-specific info
     // for use in multi-team apps
     getTokenForTeam: getTokenForTeam,
@@ -56,9 +56,7 @@ adapter.use(new SlackMessageTypeMiddleware());
 const controller = new Botkit({
     debug: true,
     webhook_uri: '/api/messages',
-
     adapter: adapter,
-
     storage
 });
 
@@ -107,7 +105,7 @@ controller.webserver.get('/install/auth', async (req, res) => {
         tokenCache[results.team_id] = results.bot.bot_access_token;
 
         // Capture team to bot id
-        userCache[results.team_id] =  results.bot.bot_user_id;
+        userCache[results.team_id] = results.bot.bot_user_id;
 
         res.json('Success! Bot installed.');
 
@@ -123,16 +121,16 @@ let userCache = {};
 
 if (process.env.TOKENS) {
     tokenCache = JSON.parse(process.env.TOKENS);
-} 
+}
 
 if (process.env.USERS) {
     userCache = JSON.parse(process.env.USERS);
-} 
+}
 
 async function getTokenForTeam(teamId) {
     if (tokenCache[teamId]) {
         return new Promise((resolve) => {
-            setTimeout(function() {
+            setTimeout(function () {
                 resolve(tokenCache[teamId]);
             }, 150);
         });
@@ -144,7 +142,7 @@ async function getTokenForTeam(teamId) {
 async function getBotUserByTeam(teamId) {
     if (userCache[teamId]) {
         return new Promise((resolve) => {
-            setTimeout(function() {
+            setTimeout(function () {
                 resolve(userCache[teamId]);
             }, 150);
         });

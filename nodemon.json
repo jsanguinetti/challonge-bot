@@ -1,0 +1,10 @@
+{
+  "watch": [
+    "bot.js",
+    "features",
+    ".env"
+  ],
+  "ext": "js",
+  "ignore": [],
+  "exec": "node ./bot.js"
+}

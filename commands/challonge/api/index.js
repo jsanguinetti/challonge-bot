@@ -1,3 +1,4 @@
 module.exports = {
-  tournaments: require("./tournaments")
+  tournaments: require("./tournaments"),
+  matches: require("./matches")
 };

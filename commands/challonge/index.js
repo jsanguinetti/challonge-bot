@@ -17,24 +17,44 @@ function errorHandler(bot, message, error) {
 
 function unknownCommandHandler(bot, message) {
   bot.httpBody({
-    text: `Command ${message} is not recognized`
+    text: `Command ${message.text} is not recognized`
   });
+}
+
+/**
+ * @param { string } key
+ * @param { string } text
+ * @return {boolean} ret
+ * */
+
+function isBinaryCommand(key, text) {
+  if (key && text) {
+    const cmdParts = text.split(" ");
+    if (cmdParts.length > 0 && cmdParts.length <= 2) {
+      if (cmdParts[0] == key) {
+        if (cmdParts[1]) {
+          if (parseInt(cmdParts[1])) {
+            return true;
+          }
+        } else {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
 }
 
 module.exports = async (bot, message) => {
   switch (message.command) {
     case "/challonge":
-      switch (message.text) {
-        case "torneos":
-          await tournaments(bot, message);
-          break;
-        case "partidos":
-          await matches(bot, message);
-          break;
-        default:
-          unknownCommandHandler(bot, message);
+      if (isBinaryCommand("torneos", message.text)) {
+        await tournaments(bot, message);
+      } else if (isBinaryCommand("partidos", message.text)) {
+        await matches(bot, message);
+      } else {
+        unknownCommandHandler(bot, message);
       }
-      break;
     case "/challonge_login":
       await login(bot, message);
       break;

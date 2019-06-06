@@ -62,9 +62,6 @@ const init = async () => {
     verificationToken: process.env.verificationToken,
     clientSigningSecret: process.env.clientSigningSecret,
 
-    // auth token for a single-team app
-    botToken: process.env.botToken,
-
     // credentials used to set up oauth for multi-team apps
     clientId: process.env.clientId,
     clientSecret: process.env.clientSecret,

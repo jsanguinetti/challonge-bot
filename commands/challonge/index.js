@@ -34,6 +34,7 @@ module.exports = async (bot, message) => {
         default:
           unknownCommandHandler(bot, message);
       }
+      break;
     case "/challonge_login":
       await login(bot, message);
       break;

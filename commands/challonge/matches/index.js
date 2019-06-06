@@ -28,9 +28,11 @@ function userDetail(user) {
   return detail;
 }
 
+// message: "partidos 2"
 module.exports = errorHandler => async (bot, message) => {
   try {
-    const res = await matches.list(message.user);
+    const [cmd, tournamentNumber] = message.text.split(" ");
+    const res = await matches.list(message.user, tournamentNumber);
     bot.httpBody({
       text: "Lista de partidos",
       attachments: res.data.map(m => {

@@ -27,19 +27,22 @@ function unknownCommandHandler(bot, message) {
  * @return {boolean} ret
  * */
 
-function isBinaryCommand(key, text) {
-  if (key && text) {
-    const cmdParts = text.split(" ");
-    if (cmdParts.length > 0 && cmdParts.length <= 2) {
-      if (cmdParts[0] == key) {
-        if (cmdParts[1]) {
-          if (parseInt(cmdParts[1])) {
-            return true;
-          }
-        } else {
-          return true;
-        }
+function isBinaryCommand(text) {
+  const cmdParts = text.split(" ");
+  if (cmdParts.length > 0 && cmdParts.length <= 2) {
+    if (cmdParts[1]) {
+      if (parseInt(cmdParts[1])) {
+        return true;
       }
+    } else {
+      return true;
+    }
+  }
+}
+function isBinaryCommandWithKey(key, text) {
+  if (key && text) {
+    if (isBinaryCommand(text) && cmdParts[0] == key) {
+      return true;
     }
   }
   return false;
@@ -48,15 +51,20 @@ function isBinaryCommand(key, text) {
 module.exports = async (bot, message) => {
   switch (message.command) {
     case "/challonge":
-      if (isBinaryCommand("torneos", message.text)) {
+      if (isBinaryCommandWithKey("torneos", message.text)) {
         await tournaments(bot, message);
-      } else if (isBinaryCommand("partidos", message.text)) {
+      } else if (isBinaryCommandWithKey("partidos", message.text)) {
         await matches(bot, message);
       } else {
         unknownCommandHandler(bot, message);
       }
+      break;
     case "/challonge_login":
-      await login(bot, message);
+      if (isBinaryCommand(message.text)) {
+        await login(bot, message);
+      } else {
+        unknownCommandHandler(bot, message);
+      }
       break;
     default:
       unknownCommandHandler(bot, message);

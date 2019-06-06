@@ -2,8 +2,8 @@ const { login } = require("../api").login;
 
 module.exports = errorHandler => async (bot, message) => {
   try {
-    const challongeUsername = message.text;
-    const res = await login(message.user, challongeUsername);
+    const [challongeUsername, tournamentNumber] = message.text.split(" ");
+    const res = await login(message.user, challongeUsername, tournamentNumber);
     bot.httpBody({
       text: "EEEXITO :éxito:"
     });

@@ -1,5 +1,11 @@
 const { tournaments } = require("../api");
 
+function tournamentMapper(t) {
+  const icon =
+    t.gameName === "Table Tennis" ? ":table_tennis_paddle_and_ball:" : "";
+  return `${t.id}. ${t.name} - ${t.gameName} ${icon}`;
+}
+
 module.exports = errorHandler => async (bot, message) => {
   try {
     const res = await tournaments.list();
@@ -8,9 +14,7 @@ module.exports = errorHandler => async (bot, message) => {
       attachments: [
         {
           color: "#2FA44F",
-          text: res.data
-            .map(t => `${t.id}. ${t.name} - ${t.gameName}`)
-            .join("\n")
+          text: res.data.map(tournamentMapper).join("\n")
         }
       ]
     });

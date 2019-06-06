@@ -41,8 +41,11 @@ function isBinaryCommand(text) {
 }
 function isBinaryCommandWithKey(key, text) {
   if (key && text) {
-    if (isBinaryCommand(text) && cmdParts[0] == key) {
-      return true;
+    if (isBinaryCommand(text)) {
+      const cmdParts = text.split(" ");
+      if (cmdParts[0] == key) {
+        return true;
+      }
     }
   }
   return false;

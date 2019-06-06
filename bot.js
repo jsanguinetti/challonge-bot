@@ -57,7 +57,7 @@ const init = async () => {
     }
   };
 
-  const adapter = new SlackAdapter({
+  const adapterOptions = {
     // parameters used to secure webhook endpoint
     verificationToken: process.env.verificationToken,
     clientSigningSecret: process.env.clientSigningSecret,
@@ -78,7 +78,10 @@ const init = async () => {
     // for use in multi-team apps
     getTokenForTeam: getTokenForTeam,
     getBotUserByTeam: getBotUserByTeam
-  });
+  };
+
+  console.log("adapterOptions", adapterOptions);
+  const adapter = new SlackAdapter(adapterOptions);
 
   // Use SlackEventMiddleware to emit events that match their original Slack event types.
   adapter.use(new SlackEventMiddleware());

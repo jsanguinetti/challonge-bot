@@ -1,4 +1,5 @@
 module.exports = {
   tournaments: require("./tournaments"),
-  matches: require("./matches")
+  matches: require("./matches"),
+  login: require("./login")
 };

@@ -1,5 +1,6 @@
 const tournaments = require("./tournaments")(errorHandler);
 const matches = require("./matches")(errorHandler);
+const login = require("./login")(errorHandler);
 
 function errorHandler(bot, message, error) {
   bot.replyPrivate(message, {
@@ -21,12 +22,20 @@ function unknownCommandHandler(bot, message) {
 }
 
 module.exports = async (bot, message) => {
-  switch (message.text) {
-    case "torneos":
-      await tournaments(bot, message);
-      break;
-    case "partidos":
-      await matches(bot, message);
+  switch (message.command) {
+    case "/challonge":
+      switch (message.text) {
+        case "torneos":
+          await tournaments(bot, message);
+          break;
+        case "partidos":
+          await matches(bot, message);
+          break;
+        default:
+          unknownCommandHandler(bot, message);
+      }
+    case "/challonge_login":
+      await login(bot, message);
       break;
     default:
       unknownCommandHandler(bot, message);

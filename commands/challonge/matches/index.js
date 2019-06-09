@@ -1,4 +1,4 @@
-const { matches } = require("../api");
+const matchesApi = require("../api").matches;
 const { isMatchLost, isPending } = require("./utils");
 
 const LOST_COLOR = "#db360d";
@@ -32,10 +32,13 @@ function userDetail(user) {
 module.exports = errorHandler => async (bot, message) => {
   try {
     const [cmd, tournamentNumber] = message.text.split(" ");
-    const res = await matches.list(message.user, tournamentNumber);
+    const res = await matchesApi.list(message.user, tournamentNumber);
+    const { matches, tournament } = res.data;
     bot.httpBody({
-      text: "Lista de partidos",
-      attachments: res.data.map(m => {
+      text: `Lista de partidos para ${
+        tournament.name
+      } :table_tennis_paddle_and_ball`,
+      attachments: matches.map(m => {
         return {
           color: color(m),
           text:

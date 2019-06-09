@@ -37,7 +37,7 @@ module.exports = errorHandler => async (bot, message) => {
     bot.httpBody({
       text: `Lista de partidos para ${
         tournament.name
-      } :table_tennis_paddle_and_ball`,
+      } :table_tennis_paddle_and_ball:`,
       attachments: matches.map(m => {
         return {
           color: color(m),

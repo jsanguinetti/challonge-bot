@@ -1,4 +1,5 @@
 const tournaments = require("./tournaments")(errorHandler);
+const help = require("./help")(errorHandler);
 const matches = require("./matches")(errorHandler);
 const login = require("./login")(errorHandler);
 
@@ -54,7 +55,9 @@ function isBinaryCommandWithKey(key, text) {
 module.exports = async (bot, message) => {
   switch (message.command) {
     case "/challonge":
-      if (isBinaryCommandWithKey("torneos", message.text)) {
+      if (message.text === "help") {
+        await help(bot);
+      } else if (isBinaryCommandWithKey("torneos", message.text)) {
         await tournaments(bot, message);
       } else if (isBinaryCommandWithKey("partidos", message.text)) {
         await matches(bot, message);

@@ -18,14 +18,18 @@ function color(m) {
 }
 
 function userDetail(user) {
-  const { externalId, challongeUsername } = user;
-  let detail = "";
-  if (externalId) {
-    detail = `<@${externalId}> (${challongeUsername})`;
+  if (user) {
+    const { externalId, challongeUsername } = user;
+    let detail = "";
+    if (externalId) {
+      detail = `<@${externalId}> (${challongeUsername})`;
+    } else {
+      detail = `${challongeUsername}`;
+    }
+    return detail;
   } else {
-    detail = `${challongeUsername}`;
+    return "Todavía no se sabe";
   }
-  return detail;
 }
 
 // message: "partidos 2"

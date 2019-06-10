@@ -3,7 +3,7 @@ const isWinner = (user, match) => {
 };
 
 const isPending = m => {
-  return m.state === "open";
+  return m.state === "open" || m.state === "pending";
 };
 
 const isMatchLost = match => {

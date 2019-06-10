@@ -135,7 +135,7 @@ const init = async () => {
 
       console.log("FULL OAUTH DETAILS", results);
 
-      /** @type {Db} */
+      /** @type {import('mongodb').Db} */
       const database = controller.plugins.database;
       await database.collection("teams").updateOne(
         {

@@ -1,14 +1,34 @@
+/**
+ * axios object
+ * @external axios
+ * @see {@link axios}
+ */
+
+const axios = require("axios");
 const tournaments = require("./tournaments")(errorHandler);
 const help = require("./help")(errorHandler);
 const matches = require("./matches")(errorHandler);
 const login = require("./login")(errorHandler);
 
 function errorHandler(bot, message, error) {
-  bot.replyPrivate(message, {
+  let errorMessage = null;
+  if (error.isAxiosError) {
+    /** @type {import('axios').AxiosError} */
+    const axiosError = error;
+    const res = axiosError.response;
+    if (res && res.data && res.data.message) {
+      errorMessage = res.data.message;
+    } else {
+      errorMessage = error.message;
+    }
+  } else {
+    errorMessage = error.message;
+  }
+  bot.replyPrivate({
     text: `Your command "${message.text}" failed`,
     attachments: [
       {
-        text: error.message,
+        text: errorMessage,
         color: "#FF2400",
         title: "Error"
       }

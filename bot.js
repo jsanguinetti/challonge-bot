@@ -1,3 +1,10 @@
+if (
+  process.env.NODE_ENV === "production" &&
+  process.env.NEW_RELIC_LICENSE_KEY
+) {
+  require("newrelic");
+}
+
 //  __   __  ___        ___
 // |__) /  \  |  |__/ |  |
 // |__) \__/  |  |  \ |  |

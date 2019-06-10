@@ -17,7 +17,8 @@
     "botkit": "^4.0.1",
     "botkit-plugin-cms": "^1.0.0",
     "dotenv": "^7.0.0",
-    "mongodb": "^3.2.7"
+    "mongodb": "^3.2.7",
+    "newrelic": "^5.9.1"
   },
   "engines": {
     "node": "10"

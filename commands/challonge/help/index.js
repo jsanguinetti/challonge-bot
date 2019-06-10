@@ -16,7 +16,7 @@ let attachments = [
     title: "Challonge Bot te trae tus partidos y sabe cuándo te toca jugar",
     color: "#2FA44F",
     text:
-      "`/challonge partidos` Muestra la lista de partidos jugados y pendientes para el torneo actual o el último jugado\n" +
+      "`/challonge partidos` Muestra la lista de partidos jugados y pendientes para el último torneo de la lista\n" +
       "`/challonge partidos N` donde `N` es el número de torneo. Muestra la lista para el torneo seleccionado",
     mrkdwn_in: ["text"]
   },

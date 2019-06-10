@@ -1,6 +1,6 @@
 const challonge = require("../commands/challonge");
 
-async function pong(bot) {
+async function pong(bot, message) {
   await bot.reply(message, "PONG :table_tennis_paddle_and_ball:");
 }
 
@@ -9,7 +9,7 @@ module.exports = function(controller) {
 
   controller.on("direct_message", async (bot, message) => {
     if (message.text && message.text.toLowerCase() === "ping") {
-      await pong(bot);
+      await pong(bot, message);
     }
   });
 
@@ -17,7 +17,7 @@ module.exports = function(controller) {
     async message => message.text && message.text.toLowerCase() === "ping",
     ["message"],
     async (bot, message) => {
-      await pong(bot);
+      await pong(bot, message);
     }
   );
 };

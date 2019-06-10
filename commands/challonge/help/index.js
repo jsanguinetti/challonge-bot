@@ -1,5 +1,12 @@
 let attachments = [
   {
+    title: "Empezá por usar `/challonge_login challonge_username N`",
+    color: "#2FA44F",
+    text:
+      "`/challonge_login challonge_username` Te loguea en el bot. Es necesario una única vez. Si tu usuario no se encuentra en el último torneo registrado (ver `/challonge torneos`) usar el nro de torneo como `N`",
+    mrkdwn_in: ["text"]
+  },
+  {
     title: "Challonge Bot tiene una lista de torneos registrados",
     color: "#2FA44F",
     text: "`/challonge torneos` devuelve la lista de torneos registrados",

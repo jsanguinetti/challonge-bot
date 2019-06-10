@@ -1,10 +1,3 @@
-/**
- * axios object
- * @external axios
- * @see {@link axios}
- */
-
-const axios = require("axios");
 const tournaments = require("./tournaments")(errorHandler);
 const help = require("./help")(errorHandler);
 const matches = require("./matches")(errorHandler);
@@ -24,7 +17,7 @@ function errorHandler(bot, message, error) {
   } else {
     errorMessage = error.message;
   }
-  bot.replyPrivate({
+  bot.replyPrivate(message, {
     text: `Your command "${message.text}" failed`,
     attachments: [
       {

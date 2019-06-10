@@ -44,11 +44,11 @@ module.exports = errorHandler => async (bot, message) => {
           text:
             `*Llave ${m.matchNumber} ${isPending(m) ? "[PENDIENTE]" : ""}*\n` +
             `_Rival:_ ${userDetail(m.adversary)}\n` +
-            isPending(m)
+            (isPending(m)
               ? ""
               : `_Resultado:_ ${m.score} ${
                   isMatchLost(m) ? ":cry:" : ":sunglasses:"
-                }`
+                }`)
         };
       })
     });

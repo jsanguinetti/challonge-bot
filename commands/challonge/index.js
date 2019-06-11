@@ -5,6 +5,7 @@ const login = require("./login")(errorHandler);
 const bowlingComiste = require("./bowling/comiste").comiste(errorHandler);
 const bowlingComisteAllowedChannel = require("./bowling/comiste")
   .ALLOWED_CHANNEL;
+const bowlingHelp = require("./bowling/help")(errorHandler);
 
 function errorHandler(bot, message, error) {
   let errorMessage = null;
@@ -110,16 +111,18 @@ module.exports = async (bot, message) => {
       }
       break;
     case "/challonge_bowling":
-      if (
+      if (message.text === "help") {
+        await bowlingHelp(bot);
+      } else if (
         bowlingComisteAllowedChannel.id === message.channel_id ||
         message.channel_name === "directmessage"
-      )
+      ) {
         if (isBinaryCommandWithKey("comiste", message.text, false)) {
           await bowlingComiste(bot, message);
         } else {
           unknownCommandHandler(bot, message);
         }
-      else {
+      } else {
         channelNotAllowedHandler(
           bot,
           message,

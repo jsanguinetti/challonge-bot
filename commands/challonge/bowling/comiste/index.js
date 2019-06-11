@@ -90,10 +90,12 @@ const comiste = errorHandler => {
       const { tournament, matches } = res.data;
       const lostMatch = matches.reverse().find(isMatchLost);
       if (lostMatch) {
-        await bot.startPrivateConversation(targetUserId);
-        await bot.say(
-          bowlingTargetWarningString(targetUserId, tournament.name)
-        );
+        if (message.channel_id === ALLOWED_CHANNEL) {
+          await bot.startPrivateConversation(targetUserId);
+          await bot.say(
+            bowlingTargetWarningString(targetUserId, tournament.name)
+          );
+        }
 
         bot.replyPublic(message, {
           text: bowlingString(targetUserId, message.user, tournament.name),

@@ -90,7 +90,7 @@ const comiste = errorHandler => {
       const { tournament, matches } = res.data;
       const lostMatch = matches.reverse().find(isMatchLost);
       if (lostMatch) {
-        if (message.channel_id === ALLOWED_CHANNEL) {
+        if (message.channel_id === ALLOWED_CHANNEL.id) {
           await bot.startPrivateConversation(targetUserId);
           await bot.say(
             bowlingTargetWarningString(targetUserId, tournament.name)

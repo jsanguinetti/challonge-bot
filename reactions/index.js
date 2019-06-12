@@ -3,6 +3,7 @@ const reactions = message => {
   if (message.text) {
     const lowerCaseMessage = message.text.toLowerCase();
     if (
+      message.user === "U3FR8M5A7" ||
       message.text.includes("U3FR8M5A7") ||
       lowerCaseMessage.includes("fiamene")
     ) {
@@ -17,6 +18,7 @@ const reactions = message => {
       );
     }
     if (
+      message.user === "U326T7S66" ||
       message.text.includes("U326T7S66") ||
       lowerCaseMessage.includes("colli") ||
       lowerCaseMessage.includes("collazo")
@@ -29,12 +31,14 @@ const reactions = message => {
       );
     }
     if (
+      message.user === "U41F763DG" ||
       message.text.includes("U41F763DG") ||
       lowerCaseMessage.includes("alfred")
     ) {
       reactionRes.push("happy-alfred", "eltres", "three");
     }
     if (
+      message.user === "U6345ABTM" ||
       message.text.includes("U6345ABTM") ||
       lowerCaseMessage.includes("matu") ||
       lowerCaseMessage.includes("heredia")

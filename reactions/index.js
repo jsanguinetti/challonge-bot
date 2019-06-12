@@ -1,58 +1,77 @@
-const reactions = message => {
-  let reactionRes = [];
-  if (message.text) {
-    const lowerCaseMessage = message.text.toLowerCase();
-    if (
+const data = [
+  {
+    conditions: (message, lowerCaseMessage) =>
       message.user === "U3FR8M5A7" ||
       message.text.includes("U3FR8M5A7") ||
-      lowerCaseMessage.includes("fiamene")
-    ) {
-      reactionRes.push(
-        "femiane2",
-        "smiling_femiane",
-        "happy_fiamene",
-        "fiamante_bandido",
-        "femiane_ref",
-        "cop",
-        "church"
-      );
-    }
-    if (
+      lowerCaseMessage.includes("fiamene"),
+    reactions: [
+      "femiane2",
+      "smiling_femiane",
+      "happy_fiamene",
+      "fiamante_bandido",
+      "femiane_ref",
+      "cop",
+      "church"
+    ]
+  },
+  {
+    conditions: (message, lowerCaseMessage) =>
       message.user === "U326T7S66" ||
       message.text.includes("U326T7S66") ||
       lowerCaseMessage.includes("colli") ||
-      lowerCaseMessage.includes("collazo")
-    ) {
-      reactionRes.push(
-        "scottie_pippen",
-        "happy_halloween",
-        "scottie_pippen_anim",
-        "sad_collazo"
-      );
-    }
-    if (
+      lowerCaseMessage.includes("collazo"),
+    reactions: [
+      "scottie_pippen",
+      "happy_halloween",
+      "scottie_pippen_anim",
+      "sad_collazo"
+    ]
+  },
+  {
+    conditions: (message, lowerCaseMessage) =>
       message.user === "U41F763DG" ||
       message.text.includes("U41F763DG") ||
-      lowerCaseMessage.includes("alfred")
-    ) {
-      reactionRes.push("happy-alfred", "eltres", "three");
-    }
-    if (
+      lowerCaseMessage.includes("alfred"),
+    reactions: ["happy-alfred", "eltres", "three"]
+  },
+  {
+    conditions: (message, lowerCaseMessage) =>
       message.user === "U6345ABTM" ||
       message.text.includes("U6345ABTM") ||
       lowerCaseMessage.includes("matu") ||
-      lowerCaseMessage.includes("heredia")
-    ) {
-      reactionRes.push(
-        "heredia_sol",
-        "heredia_hamburglar",
-        "crazy_heredia",
-        "heredia_ahhhh",
-        "stealthy_heredia"
-      );
-    }
+      lowerCaseMessage.includes("heredia"),
+    reactions: [
+      "heredia_sol",
+      "heredia_hamburglar",
+      "crazy_heredia",
+      "heredia_ahhhh",
+      "stealthy_heredia"
+    ]
   }
-  return reactionRes;
+];
+const shouldReact = message => {
+  if (message.text) {
+    const lowerCaseMessage = message.text.toLowerCase();
+    return data.find(d => d.conditions(message, lowerCaseMessage));
+  }
+};
+
+const reactions = message => {
+  if (message.text) {
+    const lowerCaseMessage = message.text.toLowerCase();
+    return data
+      .map(d => {
+        if (d.conditions(message, lowerCaseMessage)) {
+          return d.reactions;
+        } else {
+          return [];
+        }
+      })
+      .reduce((result, reactionArray) => {
+        result.push(...reactionArray);
+        return result;
+      }, []);
+  }
 };
 
 /** @param {import('botbuilder-adapter-slack').SlackBotWorker} bot */
@@ -81,9 +100,5 @@ module.exports = controller => {
     }
   });
 
-  controller.hears(
-    message => reactions(message).length > 0,
-    ["message"],
-    react
-  );
+  controller.hears(shouldReact, ["message"], react);
 };

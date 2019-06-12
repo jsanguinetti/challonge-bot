@@ -1,7 +1,7 @@
 const reactions = message => {
   if (message.text) {
     if (message.text.toLowerCase().includes("fiamene")) {
-      ["femiane2", "smiling_femiane", "happy_fiamene"];
+      return ["femiane2", "smiling_femiane", "happy_fiamene"];
     }
   }
 };

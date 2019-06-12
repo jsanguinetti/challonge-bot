@@ -47,6 +47,34 @@ const data = [
       "heredia_ahhhh",
       "stealthy_heredia"
     ]
+  },
+  {
+    conditions: (message, lowerCaseMessage) =>
+      message.user === "U2PHJUT7B" ||
+      message.text.includes("U2PHJUT7B") ||
+      lowerCaseMessage.includes("javier"),
+    reactions: ["javier"]
+  },
+  {
+    conditions: (message, lowerCaseMessage) =>
+      message.user === "U2PHG9BKQ" ||
+      message.text.includes("U2PHG9BKQ") ||
+      lowerCaseMessage.includes("varangot"),
+    reactions: ["cotorra_loca", "cotorra_loca_fly", "goat"]
+  },
+  {
+    conditions: (message, lowerCaseMessage) =>
+      message.user === "U2PHWMD50" ||
+      message.text.includes("U2PHWMD50") ||
+      lowerCaseMessage.includes("torres") ||
+      lowerCaseMessage.includes("nicky") ||
+      lowerCaseMessage.includes("nico torres"),
+    reactions: ["torres_samurai", "evil_torres", "torres_time", "torresvapea"]
+  },
+  {
+    conditions: message =>
+      message.user === "U7S2FUJ2G" || message.text.includes("U7S2FUJ2G"),
+    reactions: ["nacho", "lorenzo", "nacho_lorenzo", "nacho_abba"]
   }
 ];
 const shouldReact = message => {

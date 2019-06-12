@@ -1,4 +1,4 @@
-const matchesApi = require("../api").matches;
+const matchesApi = require("../../utils/api").matches;
 const { mapMatch } = require("./utils");
 
 // message: "partidos 2"

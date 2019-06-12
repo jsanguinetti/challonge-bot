@@ -1,4 +1,4 @@
-const { tournaments } = require("../api");
+const { tournaments } = require("../../utils/api");
 
 function tournamentMapper(t) {
   const icon =

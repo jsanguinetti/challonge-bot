@@ -1,4 +1,4 @@
-const { login } = require("../api").login;
+const { login } = require("../../utils/api").login;
 
 module.exports = errorHandler => async (bot, message) => {
   try {

@@ -1,4 +1,4 @@
-const challonge = require("../commands/challonge");
+const challonge = require("../commands");
 
 async function pong(bot, message) {
   await bot.reply(message, "PONG :table_tennis_paddle_and_ball:");

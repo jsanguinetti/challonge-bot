@@ -35,8 +35,8 @@ function bowlingTargetWarningString(bowlingUserId, tournamentName) {
   ];
 }
 
-const matchesApi = require("../../api").matches;
-const { isMatchLost, mapMatch } = require("../../matches/utils");
+const matchesApi = require("../../utils/api").matches;
+const { isMatchLost, mapMatch } = require("../../challonge/matches/utils");
 
 const ALLOWED_CHANNEL = {
   name: process.env.COMISTE_ALLOWED_CHANNEL_NAME || "",

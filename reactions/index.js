@@ -57,18 +57,16 @@ const reactions = message => {
 const react = async (bot, message, reactionsToUse) => {
   reactionsToUse = reactionsToUse || reactions(message);
   const slackClient = bot.api;
-  await Promise.all(
-    reactionsToUse.map(async r => {
-      const options = {
-        channel: message.channel,
-        timestamp: message.incoming_message.id,
-        name: r
-      };
 
-      /** @link https://api.slack.com/methods/reactions.add */
-      return await slackClient.reactions.add(options);
-    })
-  );
+  reactionsToUse.reduce(async (previousPromise, nextReaction) => {
+    await previousPromise;
+    const options = {
+      channel: message.channel,
+      timestamp: message.incoming_message.id,
+      name: nextReaction
+    };
+    return slackClient.reactions.add(options);
+  }, Promise.resolve());
 };
 
 module.exports = controller => {

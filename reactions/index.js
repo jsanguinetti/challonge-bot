@@ -106,18 +106,20 @@ const reactions = message => {
 /** @param {import('../features/slack_event').SlackEvent} message */
 /** @param {String[]} reactionsToUse */
 const react = async (bot, message, reactionsToUse) => {
-  reactionsToUse = reactionsToUse || reactions(message);
-  const slackClient = bot.api;
+  if (Math.random() > 0.9) {
+    reactionsToUse = reactionsToUse || reactions(message);
+    const slackClient = bot.api;
 
-  reactionsToUse.reduce(async (previousPromise, nextReaction) => {
-    await previousPromise;
-    const options = {
-      channel: message.channel,
-      timestamp: message.incoming_message.id,
-      name: nextReaction
-    };
-    return slackClient.reactions.add(options);
-  }, Promise.resolve());
+    reactionsToUse.reduce(async (previousPromise, nextReaction) => {
+      await previousPromise;
+      const options = {
+        channel: message.channel,
+        timestamp: message.incoming_message.id,
+        name: nextReaction
+      };
+      return slackClient.reactions.add(options);
+    }, Promise.resolve());
+  }
 };
 
 module.exports = controller => {

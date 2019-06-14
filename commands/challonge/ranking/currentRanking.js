@@ -12,19 +12,33 @@ function userNombre(user) {
 
 /** @param { import('../../../../challonge/src/ranking/ranking.interface').IRankingEntry[]} currentRanking */
 function usingAsciiTable(currentRanking) {
-  const table = new AsciiTable("Ranking");
+  const table = new AsciiTable(
+    `Ranking S${currentRanking[0].rankingWeekNumber}`
+  );
   table.setBorder(" ", "-", ".");
   table.setHeading(
     "Pos",
     "Nombre",
-    `S${currentRanking[0].rankingWeekNumber}`,
+    `Pts Def S${currentRanking[0].rankingWeekNumber}`,
     "Pts",
     "Pds",
     "Sets",
-    "Rank +-",
+    "Pos+-",
     AsciiTable.alignCenter("@", 20)
   );
-  currentRanking.forEach(rankingEntry => {
+  currentRanking.forEach((rankingEntry, index) => {
+    if (index === 16) {
+      table.addRow(
+        "-----",
+        "-----------------",
+        "------------",
+        "------",
+        "-----",
+        "------",
+        "-------",
+        "----------------------"
+      );
+    }
     table.addRow(
       rankingEntry.position,
       rankingEntry.user.challongeUsername,

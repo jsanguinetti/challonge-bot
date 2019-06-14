@@ -21,6 +21,12 @@ let attachments = [
     mrkdwn_in: ["text"]
   },
   {
+    title: "Challonge Bot conoce el ranking",
+    color: "#2FA44F",
+    text: "`/challonge ranking` Muestra la tabla del ranking",
+    mrkdwn_in: ["text"]
+  },
+  {
     title: "Challonge Bot Ayuda",
     color: "#2FA44F",
     text: "`/challonge help` ... Lo estás viendo! \n",

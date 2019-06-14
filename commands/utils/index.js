@@ -1,3 +1,4 @@
 module.exports = {
-  cmdParser: require("./cmdParser")
+  cmdParser: require("./cmdParser"),
+  usernames: require("./usernames")
 };

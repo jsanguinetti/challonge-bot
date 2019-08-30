@@ -4,6 +4,14 @@ const challongeLoginHandler = require("./challonge_login");
 const challongeBowlingHandler = require("./challonge_bowling");
 const challongeDevHandler = require("./challonge_dev");
 
+process.on('unhandledRejection', (error) => {
+  let err = error;
+  if (!(err instanceof Error)) {
+    err = new Error(err);
+  }
+  console.error(err);
+});
+
 module.exports = async (bot, message) => {
   switch (message.command) {
     case "/challonge":

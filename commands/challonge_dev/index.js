@@ -1,3 +1,3 @@
 module.exports = async (bot, message) => {
-    console.error(new Error('Este es un error de ejemplo para probar Stackdriver Error Reporting'))
+    throw new Error('Otro error para ver si funca no manejar una promesa')
 };

@@ -1,0 +1,20 @@
+steps:
+  # build the container image
+- name: 'gcr.io/kaniko-project/executor:latest'
+  args:
+  - --destination=gcr.io/$PROJECT_ID/$_SERVICE_NAME
+  - --cache-repo=gcr.io/$PROJECT_ID/kaniko-cache
+  - --cache=true
+  - --cache-ttl=360h
+  # Deploy container image to Cloud Run
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: [
+    'beta', 'run', 'deploy', '$_SERVICE_NAME', 
+    '--image', 'gcr.io/$PROJECT_ID/$_SERVICE_NAME', 
+    '--region', '$_REGION',
+    '--platform', 'managed', 
+    '--quiet',
+    '--update-env-vars',
+    'API_KEY=$_API_KEY,BASE_URL=$_BASE_URL,BUGSNAG_API_KEY=$_BUGSNAG_API_KEY,COMISTE_ALLOWED_CHANNEL=$_COMISTE_ALLOWED_CHANNEL,COMISTE_ALLOWED_CHANNEL_NAME=$_COMISTE_ALLOWED_CHANNEL_NAME,MONGODB_URI=$_MONGODB_URI,NEW_RELIC_LICENSE_KEY=$_NEW_RELIC_LICENSE_KEY,NEW_RELIC_LOG=$_NEW_RELIC_LOG,botToken=$_BOT_TOKEN,clientId=$_CLIENT_ID,clientSecret=$_CLIENT_SECRET,clientSigningSecret=$_CLIENT_SIGNING_SECRET,redirectUri=$_REDIRECT_URI,verificationToken=$_VERIFICATION_TOKEN'
+  ]
+

@@ -22,7 +22,7 @@
     "newrelic": "^5.9.1"
   },
   "engines": {
-    "node": "10"
+    "node": ">=10.0"
   },
   "devDependencies": {
     "foreman": "^3.0.1",
